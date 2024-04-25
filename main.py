@@ -27,6 +27,8 @@ def dashboard():
 def sales():
     return render_template("sales.html")
 
+@app.route("/index")
+def index():
+    return render_template("index.html")
 
-
-app.run()
+app.run(debug=True)
