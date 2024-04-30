@@ -15,12 +15,12 @@ cur = conn.cursor()
 def get_products():  
     prods = cur.execute("select * from products;")
     prods = cur.fetchall()  
-    return prods
+    return prods  
     # print(prods)
     # for i in prods:
-    #     print(i)
-prods = get_products()
-print(prods)
+    #     print(i) 
+# prods = get_products()
+# print(prods)
 
 sal = conn.cursor()
 
@@ -31,17 +31,16 @@ def get_sales():
     #     print(i)
         
 
-get_sales()
+# get_sales()
   
 def get_data(table):
     select = f"select * from {table}"
     cur.execute(select)
     data = cur.fetchall()
-    # for i in data:
-    #     print(i)
+    return data
 
 # get_data("products")
-# get_data("sales")
+get_data("sales")
 
 # function to insert products
         
@@ -79,16 +78,16 @@ def insert_sales(values):
 sales_value = (1,20,"now()")
 insert_sales(sales_value)
 
-get_data('products')
-get_data('sales') 
+# get_data('products')
+# get_data('sales') 
 
 def insert_sales(values):
     insert = """insert into sales(pid,quantity,created_at
-    )values(%s,%s,%s)"""
-    sal.execute(insert,values)
+    )values(%s,%s,now())"""
+    cur.execute(insert,values)
     conn.commit()
-sales_value = (1,90,"now()")
-insert_sales(sales_value)
+# sales_value = (1,90,"now()")
+# insert_sales(sales_value)
 
-get_data('products')
+# get_data('products')
 get_data('sales')

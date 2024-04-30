@@ -71,39 +71,77 @@
       </div>
     </nav>
 
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Add Products
+</button>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Products</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/add_products" method="POST">
+          <label for="products_name">Name</label><br>
+          <input name="products_name" type="text"><br>
+          <label for="Selling_Price">Selling_Price</label><br>
+          <input name="Selling_Price" type="number"><br>
+          <label for="Buying_Price">Buying Price</label><br>
+          <input name="Buying_Price" type="number"><br>
+          <label for="Stock_Quantity">Stock_Quantity</label><br>
+          <input name="Stock_Quantity" type="number"><br>
+          <button type="submit " class="btn btn-primary">ADD</button>
+        
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Add</button> -->
+      </div>
+    </div>
+  </div>
+</div>
 
     
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">No.</th>
+          <th scope="col">ID</th>
           <th scope="col">Name</th>
-          <th scope="col">Price</th>
-          <th scope="col">Quantity</th>
+          <th scope="col">Buying_Price(ksh)</th>
+          <th scope="col">Selling_Price(ksh)</th>
+          <th scope="col">Stock Quantity</th>
         </tr>
       </thead>
       <tbody>
+        {% for i in prods%}
         <tr>
-          <th scope="row">1</th>
-          <td>Watermelon</td>
-          <td>$5</td>
-          <td>1</td>
+          <td>{{i[0]}}</td>
+          <td>{{i[1]}}</td>
+          <td>{{i[2]}}</td>
+          <td>{{i[3]}}</td>
+          <td>{{i[4]}}</td>
         </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Chocolate</td>
-          <td>$25</td>
-          <td>3</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <!-- <td colspan="2">Hand Bag</td> -->
-          <td>Hand Bag</td>
-          <td>$35</td>
-          <td>1</td>
-        </tr>
+        {% endfor %}
       </tbody>
     </table>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
   </body>
