@@ -1,5 +1,5 @@
 from flask import Flask,render_template,request,redirect,url_for,flash
-from database import get_data,insert_products,insert_sales
+from database import get_data,insert_products,insert_sales,prof_per_prod,profit_per_day,sales_per_day,sales_per_prod
 
 
 # flask instance
@@ -24,8 +24,8 @@ def products():
 @app.route("/add_products", methods=["GET","POST"])
 def add_prods():
     p_name = request.form["products_name"]
-    b_price = request.form["Buying_Price"]
     s_price = request.form["Selling_Price"]
+    b_price = request.form["Buying_Price"]
     s_quantity = request.form["Stock_Quantity"]
 
     new = (p_name,b_price,s_price,s_quantity)
@@ -36,7 +36,38 @@ def add_prods():
 # dashboard and render
 @app.route("/dashboard")
 def dashboard():
-    return render_template("dashboard.html")
+    p_product = prof_per_prod()
+    p_day = profit_per_day()
+    s_day = sales_per_day()
+    s_prod  = sales_per_prod()
+    # print(p_product)
+    # print(p_day)
+    # print(s_day)
+    print(s_prod)
+    p_name = []
+    p_profit = []
+    day = []
+    d_profit = []
+    sales_day = []
+    sales_prod = []
+    x = []
+    y = []
+    for i in p_product:
+        p_name.append(i[0])
+        p_profit.append(i[1])
+    
+    for i in p_day:
+        day.append(str(i[0]))
+        d_profit.append(i[1])
+
+    for i in s_day:
+        sales_day.append(str(i[0]))
+        sales_prod.append(i[1])
+
+    for i in s_prod:
+        x.append(i[0])
+        y.append(i[1])
+    return render_template("dashboard.html",name=p_name,profit=p_profit,day = day,d_profit=d_profit,pro_name=x,pro_sales=y,sales_prod=sales_prod)
 
 
 @app.route("/sales")
