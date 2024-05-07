@@ -43,6 +43,12 @@
               <li class="nav-item">
                 <a class="nav-link" href="sales" style="margin-left: 30px;">Sales</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="login" style="margin-left: 30px;">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="register" style="margin-left: 30px;">Register</a>
+              </li>
               <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Products
@@ -75,11 +81,10 @@
       </nav>
      
       <canvas id="bar-chart" width="80" height="40"></canvas>
-        <!-- <canvas id="line-chart" width="800" height="450"></canvas> -->
+      <canvas id="line-chart" width="800" height="450"></canvas>
 
 
-    </div>
-    <!-- <h1>Dashboard</h1> -->
+    </div> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script>
         new Chart(document.getElementById("bar-chart"), {
@@ -107,32 +112,32 @@
             }
         }
 });
-        // new Chart(document.getElementById("line-chart"), {
-        //     type: 'line',
-        //     data: {
-        //         labels: {{ day | safe}},
-        //     datasets: [{
-        //         data: {{ d_profit | safe}},
-        //     label: "Profit",
-        //     borderColor: "#3e95cd",
-        //     fill: false
-        //         },
-        //         {
-        //         data: {{ sales_prod | safe}},
-        //     label: "Sales",
-        //     borderColor: "#3e95cd",
-        //     fill: false
-        //         },
+        new Chart(document.getElementById("line-chart"), {
+            type: 'line',
+            data: {
+                labels: {{ day | safe}},
+            datasets: [{
+                data: {{ d_profit | safe}},
+            label: "Profit",
+            borderColor: "#3e95cd",
+            fill: false
+                },
+                {
+                data: {{ sales_prod | safe}},
+            label: "Sales",
+            borderColor: "262626",
+            fill: false
+                },
 
-        // ]
-        //     },
-        //     options: {
-        //     title: {
-        //         display: true,
-        //         text: 'PROFIT PER DAY(KSH.)'
-        //     }
-        // }
-        // });
+        ]
+            },
+            options: {
+            title: {
+                display: true,
+                text: 'PROFIT PER DAY(KSH.)'
+            }
+        }
+        });
 
 
     </script>

@@ -1,5 +1,5 @@
 from flask import Flask,render_template,request,redirect,url_for,flash
-from database import get_data,insert_products,insert_sales,prof_per_prod,profit_per_day,sales_per_day,sales_per_prod
+from database import get_data,insert_products,insert_sales,prof_per_prod,profit_per_day,sales_per_day,sales_per_prod,insert_user
 
 
 # flask instance
@@ -54,19 +54,19 @@ def dashboard():
     y = []
     for i in p_product:
         p_name.append(i[0])
-        p_profit.append(i[1])
+        p_profit.append(float(i[1]))
     
     for i in p_day:
         day.append(str(i[0]))
-        d_profit.append(i[1])
+        d_profit.append(float(i[1]))
 
     for i in s_day:
         sales_day.append(str(i[0]))
-        sales_prod.append(i[1])
+        sales_prod.append(float(i[1]))
 
     for i in s_prod:
         x.append(i[0])
-        y.append(i[1])
+        y.append(float(i[1]))
     return render_template("dashboard.html",name=p_name,profit=p_profit,day = day,d_profit=d_profit,pro_name=x,pro_sales=y,sales_prod=sales_prod)
 
 
@@ -86,5 +86,25 @@ def make_sales():
     
     insert_sales(new_sales)
     return redirect(url_for("sales"))
+
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+# register user
+@app.route("/register", methods=["POST","GET"])
+def register():
+    # get form data
+    if request.method == "POST":
+        f_name = request.form["full_name"]
+        email = request.form["email"]
+        password = request.form["password"]
+        # insert user
+        new_user = (f_name,email,password)
+        insert_user(new_user)
+        return redirect(url_for("login"))
+    return render_template("register.html")
+
+
 
 app.run(debug=True)

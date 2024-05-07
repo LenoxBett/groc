@@ -126,3 +126,10 @@ def sales_per_day():
     return data
 s_day = sales_per_day()
 print(s_day)
+
+
+def insert_user(values):
+    query = "insert into users(full_name,email,password) values(%s,%s,%s)"
+    cur.execute(query,values)
+    conn.commit()
+    
