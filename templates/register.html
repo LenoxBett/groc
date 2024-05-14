@@ -48,6 +48,9 @@
           <li class="nav-item">
             <a class="nav-link" href="register" style="margin-left: 30px;">Register</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="logout" style="margin-left: 30px;">Logout</a>
+          </li>
           <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Products
@@ -78,6 +81,16 @@
       </div>
     </div>
   </nav>
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+  {% endwith %}
 
   <form action="/register" method="post">
     <label for="full_name">full_name</label><br>

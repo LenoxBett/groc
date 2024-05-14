@@ -132,4 +132,19 @@ def insert_user(values):
     query = "insert into users(full_name,email,password) values(%s,%s,%s)"
     cur.execute(query,values)
     conn.commit()
-    
+
+
+def check_email(email):
+    query = 'select * from users where email = %s'
+    cur.execute(query,(email,))
+    data = cur.fetchone()
+    return data
+
+
+# email and password
+
+def check_email_pass(email,password):
+    query = 'select * from users where email = %s and password = %s'
+    cur.execute(query,(email,password,))
+    data = cur.fetchall()
+    return data
